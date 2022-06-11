@@ -1,0 +1,51 @@
+.big_checkbox {
+    width: 24px !important;
+    height: 24px !important;
+
+}
+
+thead {
+    text-align: center !important;
+}
+
+footer {
+    font-size: 0.75em;
+}
+
+.text_small {
+    font-size: 0.875em;
+}
+
+.skill_table_bottom {
+    border-bottom-width: 4px !important;
+}
+
+.skill_icon {
+    display: inline-block;
+    position: relative;
+    width: 38px;
+    height: 38px;
+    vertical-align: middle;
+}
+
+.skill_icon:after {
+    content: "";
+    background: url(./img/mask.png) no-repeat;
+    background-size: contain;
+    width: 38px;
+    height: 38px;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.skill_icon img {
+    position: absolute;
+    top: 1px !important;
+    left: 23px !important;
+    margin-left: -20px;
+    display: block;
+    z-index: 1;
+}

@@ -1,0 +1,230 @@
+<!doctype html>
+
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=yes">
+
+        <title>채집 스킬 로테이션</title>
+        
+        <link rel="publisher" href="https://ryuar.in">
+
+        <meta name="author" content="RyuaNerin" />
+        <meta name="robots" content="noarchive" />
+
+        <meta name="description" content="About RyuaNerin" />
+
+        <meta name="twitter:card"        content="summary" />
+        <meta name="twitter:site"        content="@RyuaNerin" />
+        <meta name="twitter:creator"     content="@RyuaNerin" />
+        <meta name="twitter:title"       content="채집 스킬 로테이션" />
+        <meta name="twitter:description" content="파이널 판타지 14에서 주어진 조건에서 가장 이득을 많이 볼 수 있는 스킬 조합을 찾아주는 사이트입니다." />
+
+        <meta property="og:site_name"   content="채집 스킬 로테이션" />
+        <meta property="og:url"         content="https://ff14.ryuar.in/gather/" />
+        <meta property="og:description" content="파이널 판타지 14에서 주어진 조건에서 가장 이득을 많이 볼 수 있는 스킬 조합을 찾아주는 사이트입니다." />
+        <meta property="og:type"        content="website" />
+        <meta property="og:title"       content="채집 스킬 로테이션" />
+
+        <link href="./index.css" rel="stylesheet" type="text/css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link href="https://unpkg.com/bootstrap-table@1.20.2/dist/bootstrap-table.min.css" rel="stylesheet">
+    </head>
+
+    <body class="my-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-2 text-center fs-2">
+                        조건 설정
+                    </div>
+                    <div class="row mb-2">
+                        <label for="inputJob" class="col-sm-6 col-form-label btn-group-lg">직업</label>
+                        <div class="col-sm btn-group" id="inputJob" role="group">
+                            <input type="radio" class="btn-check" name="inputJob" id="miner" autocomplete="off" checked>
+                            <label class="btn btn-outline-secondary" for="miner">광부</label>
+
+                            <input type="radio" class="btn-check" name="inputJob" id="botanist" autocomplete="off">
+                            <label class="btn btn-outline-success" for="botanist">원예가</label>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <label for="inputDurability" class="col-sm-6 col-form-label">내구도</label>
+                        <div class="col-sm">
+                            <input type="number" min="4" max="10" value="6" class="form-control" id="inputDurability">
+                        </div>
+                    </div>
+
+                    <div class="row mb-1">
+                        <label for="inputGatherRatio" class="col-sm-6 col-form-label">채집 확률 (%)</label>
+                        <div class="col-sm">
+                            <input type="number" min="0" max="100" value="100" class="form-control" id="inputGatherRatio">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label for="inputGatherAmount" class="col-sm-6 col-form-label">1회당 채집 개수</label>
+                        <div class="col-sm">
+                            <input type="number" min="1" max="5" value="2" class="form-control" id="inputGatherAmount">
+                        </div>
+                    </div>
+
+                    <div class="row mb-1">
+                        <label for="inputBonusRatio" class="col-sm-6 col-form-label">획득 수 보너스 발생률 (%)</label>
+                        <div class="col-sm">
+                            <input type="number" min="0" max="100" value="33" class="form-control" id="inputBonusRatio">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label for="inputBonusAmount" class="col-sm-6 col-form-label">획득 수 보너스 갯수</label>
+                        <div class="col-sm">
+                            <input type="number" min="1" max="5" value="1" class="form-control" id="inputBonusAmount">
+                        </div>
+                    </div>
+
+                    <div class="row mb-1">
+                        <label for="inputGp" class="col-sm-6 col-form-label">GP</label>
+                        <div class="col-sm">
+                            <input type="number" min="0" max="1000" value="900" class="form-control" id="inputGp">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label for="inputGpRegen" class="col-sm-6 col-form-label">채집당 GP 회복</label>
+                        <div class="col-sm">
+                            <input type="number" min="3" max="6" value="6" class="form-control" id="inputGpRegen">
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <label for="inputBountifulYieldAmount" class="col-sm-6 col-form-label">막대한 수확2 추가 개수</label>
+                        <div class="col-sm">
+                            <input type="number" min="1" max="3" value="3" class="form-control" id="inputBountifulYieldAmount">
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <label for="inputDurability" class="col-sm-6 col-form-label">검색 조건</label>
+                        <div class="col-sm">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="FindRule" id="FindRuleAspect" value="Aspect" checked>
+                                <label class="form-check-label" for="FindRuleAspect">기대 수치</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="FindRule" id="FindRuleMin" value="Min">
+                                <label class="form-check-label" for="FindRuleMin">최소 개수 보장</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="FindRule" id="FindRuleMax" value="Max">
+                                <label class="form-check-label" for="FindRuleMax">최대 개수 가능성</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="text-center">
+                            <label for="inputSkills" class="fs-3">사용할 스킬</label>
+                        </div>
+                        <table id="inputSkills" class="table table-hover">
+                            <thead class="table-light">
+                                <th scope="col">#</th>
+                                <th scope="col">Lv</th>
+                                <th scope="col">이름</th>
+                                <th scope="col">GP</th>
+                                <th scope="col">설명</th>
+                            </thead>
+                            <tbody id="inputSkillsBody" class="align-middle">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="mb-4">
+                        <div class="d-grid">
+                            <div class="btn-group btn-group-lg">
+                                <button class="w-75 btn btn-primary" type="button" id="solve">
+                                    로테이션 찾기
+                                </button>
+                                <button class="w-25 btn btn-outline-danger disabled" type="button" id="cancel">
+                                    중지
+                                </button>
+                            </div>
+                        </div>
+                        <div class="progress mt-2">
+                            <div id="progress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%;">0%</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="text-center">
+                            <label for="outputStat" class="fs-3">조합 결과</label>
+                        </div>
+                        <table id="outputStat" class="table table-sm table-hover">
+                            <tbody id="outputTbody" class="align-middle">
+                                <tr><td>분석 시간            </td><td id="outputStatisticsTime"  ></td></tr>
+                                <tr><td>분석 정보            </td><td id="outputStatisticsInfo"  ></td></tr>
+                                <tr><td>스킬 없이 예상 획득량</td><td id="outputAmountDefault"   ></td></tr>
+                                <tr><td>스킬 사용 예상 획득량</td><td id="outputAmountWithSkills"></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="text-center">
+                            <label for="outputSkillCount" class="fs-3">사용 스킬</label>
+                        </div>
+                        <table id="outputSkillCount" class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">스킬</th>
+                                    <th scope="col">GP</th>
+                                    <th scope="col">횟수</th>
+                                </tr>
+                            </thead>
+                            <tbody id="outputSkillCountBody" class="align-middle">
+                            </tbody>
+                            <tfoot class="align-middle table-light">
+                                <th scope="row" class="text-center">합</th>
+                                <td></td>
+                                <td class="text-center fw-bold" id="outputSkillCountFootGP">0</td>
+                                <td class="text-center fw-bold" id="outputSkillCountFootCount">0</td>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="text-center">
+                            <label for="outputRotation" class="fs-3">로테이션</label>
+                        </div>
+                        <table id="outputRotation" class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">스킬</th>
+                                    <th scope="col">내구도</th>
+                                    <th scope="col">GP</th>
+                                    <th scope="col">예상 획득량</th>
+                                    <th scope="col">누적</th>
+                                </tr>
+                            </thead>
+                            <tbody id="outputRotationBody" class="align-middle">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="text-center font-monospace lh-sm">
+            Copyright (C) <a href="https://ryuar.in/" target="_blank">RyuaNerin</a>, Sourcecode on <a href="https://github.com/RyuaNerin/ffxiv-gathering-skill-builder" target="_blank">Github</a>.<br>
+            ALL FINAL FANTASY XIV CONTENT IS PROPERTY OF SQUARE ENIX CO., LTD<br>
+            ALL OF THE KOREAN TRANSLATIONS IS PUBLISHED BY ACTOZ SOFT CO., LTD.
+        </footer>
+
+        <script src="solver.js"></script>
+
+        <script src="index.js"></script>
+    </body>
+</html>
